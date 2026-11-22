@@ -1,0 +1,28 @@
+name: Build Geode Mod
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Android
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Geode Mod
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          sdk: latest
+          target: Android64
+
+      - name: Upload Geode
+        uses: actions/upload-artifact@v4
+        with:
+          name: SplitScreen-geode
+          path: build/**/*.geode
